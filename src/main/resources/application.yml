@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${MYSQL_PASSWORD}
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USERNAME}
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+  jpa:
+    generate-ddl: false
+    show-sql: false
+auth:
+  jwt:
+    accessExp: ${JWT_EXP_ACCESS}
+    refreshExp: ${JWT_EXP_REFRESH}
+    secret: ${JWT_SECRET_KEY}
