@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class CreateWorryRequestDto {
 
     private String contents;
-    private MultipartFile imgUrl;
+    private MultipartFile imgFile;
     private Long userSeq;
 
 }
