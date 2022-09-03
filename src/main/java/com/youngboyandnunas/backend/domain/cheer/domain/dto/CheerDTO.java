@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -28,5 +31,7 @@ public class CheerDTO {
     private String imgUrl;
 
     private String audioUrl;
+
+    private Date cheerInsertDate;
 
 }
