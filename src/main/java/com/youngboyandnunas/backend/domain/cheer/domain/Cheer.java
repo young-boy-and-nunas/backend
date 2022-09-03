@@ -32,6 +32,8 @@ public class Cheer {
 
     private String audioUrl;
 
+    private boolean readCheck;
+
     @Builder
     public Cheer(Worry worry, User user, String contents, String imgUrl, String audioUrl) {
         this.worry = worry;
@@ -39,6 +41,7 @@ public class Cheer {
         this.contents = contents;
         this.imgUrl = imgUrl;
         this.audioUrl = audioUrl;
+        this.readCheck = false;
     }
 
 }
