@@ -2,6 +2,7 @@ package com.youngboyandnunas.backend.domain.history.domain;
 
 import com.youngboyandnunas.backend.domain.user.domain.User;
 import com.youngboyandnunas.backend.domain.worry.domain.Worry;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,5 +24,12 @@ public class History {
     @ManyToOne
     @JoinColumn(name = "user_seq", nullable = false)
     private User user;
+
+    @Builder
+    public History(Long historySeq, Worry worry, User user) {
+        this.historySeq = historySeq;
+        this.worry = worry;
+        this.user = user;
+    }
 
 }
