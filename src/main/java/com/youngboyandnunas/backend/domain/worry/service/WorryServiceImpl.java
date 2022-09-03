@@ -29,10 +29,10 @@ public class WorryServiceImpl implements WorryService {
     @Transactional
     @Override
     public WorryResponseDTO getRandomWorry() {
-        Worry worry = worryRepository.getRandomWorry();
+        Long userId = authenticationFacade.getUserId();
+        Worry worry = worryRepository.getRandomWorry(userId);
         if (worry == null)
             throw new GlobalException(ErrorCode.NOT_FOUND_ERROR);
-        Long userId = authenticationFacade.getUserId();
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new GlobalException(ErrorCode.BAD_REQUEST_ERROR));
 
