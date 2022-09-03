@@ -22,16 +22,19 @@ public class User {
 
     private String password;
 
+    private String nickname;
+
     private int luckyPoint;
 
     private int state;
 
     @Builder
-    public User(String id, String password, int luckyPoint, int state) {
+    public User(String id, String password, String nickname) {
         this.id = id;
         this.password = password;
-        this.luckyPoint = luckyPoint;
-        this.state = state;
+        this.nickname = nickname;
+        this.luckyPoint = 10;
+        this.state = 0;
     }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)

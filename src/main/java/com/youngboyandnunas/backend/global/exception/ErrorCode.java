@@ -17,7 +17,8 @@ public enum ErrorCode {
     UNAUTHORIZED_ERROR(UNAUTHORIZED, "Unauthorized"),
 
     /* 404 NOT_FOUND : Resource 를 찾을 수 없음 */
-    NOT_FOUND_ERROR(NOT_FOUND, "Not found"),
+    NOT_FOUND_ERROR(NOT_FOUND, "Not Found"),
+    ALL_ALREADY_EXISTS(CONFLICT, "All Already Exists")
 
     ;
 
