@@ -6,6 +6,7 @@ import com.youngboyandnunas.backend.global.infra.AwsS3UploadFacade;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,16 +20,15 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+@Component
 public class FileStorageUtil{
 
-    private final Path rootLocation;
     private final UUID uuid;
     private final AwsS3UploadFacade awsS3UploadFacade;
 
     @Autowired
-    public FileStorageUtil(Path rootLocation, UUID uuid, AwsS3UploadFacade awsS3UploadFacade) {
-        this.rootLocation = rootLocation;
-        this.uuid = uuid;
+    public FileStorageUtil(AwsS3UploadFacade awsS3UploadFacade) {
+        this.uuid = UUID.randomUUID();
         this.awsS3UploadFacade = awsS3UploadFacade;
     }
 

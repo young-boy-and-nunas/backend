@@ -44,4 +44,15 @@ public class Cheer {
         this.readCheck = false;
     }
 
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
 }
