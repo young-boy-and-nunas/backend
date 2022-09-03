@@ -31,11 +31,11 @@ public class FileStorageUtil{
             }
 
             newFileName = uuid +"_"+ multipartFile.getOriginalFilename();
-            File uploadFile = new File(newFileName);
+            File uploadFile = new File(System.getProperty("user.dir") + "/" + newFileName);
 
             multipartFile.transferTo(uploadFile);
 
-            return awsS3UploadFacade.uploadFileInMemory(uploadFile, newFileName);
+            return awsS3UploadFacade.uploadFile(uploadFile, newFileName);
 
         }
         catch (IOException e) {

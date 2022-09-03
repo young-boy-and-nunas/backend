@@ -26,10 +26,10 @@ public class AwsS3UploadFacade {
         return getFileUrl(fileName);
     }
 
-    public String uploadFileInMemory(File file, String fileName){
-        amazonS3.putObject(bucket, fileName, file);
-        return getFileUrl(fileName);
-    }
+//    public String uploadFileInMemory(File file, String fileName){
+//        amazonS3.putObject(bucket, fileName, file);
+//        return getFileUrl(fileName);
+//    }
 
     public void deleteFile(String fileUrl) {
         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
