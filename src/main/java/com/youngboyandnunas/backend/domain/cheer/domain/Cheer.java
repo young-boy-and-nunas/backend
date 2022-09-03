@@ -55,4 +55,12 @@ public class Cheer {
     public void setUser(User user){
         this.user = user;
     }
+
+    public void setWorry(Worry worry){
+        this.worry = worry;
+    }
+
+    public void updateCheck(){
+        this.readCheck = true;
+    }
 }

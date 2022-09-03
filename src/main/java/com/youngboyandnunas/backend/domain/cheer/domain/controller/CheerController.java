@@ -4,7 +4,9 @@ import com.youngboyandnunas.backend.domain.cheer.domain.dto.CheerDTO;
 import com.youngboyandnunas.backend.domain.cheer.domain.service.CheerService;
 import com.youngboyandnunas.backend.global.security.service.AuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/cheer")
@@ -19,11 +21,23 @@ public class CheerController {
         this.authenticationFacade = authenticationFacade;
     }
 
-    //TODO : return reseponse
-    @PostMapping("/")
+    @PostMapping("/make-cheer")
     public void makeCheer(CheerDTO cheerDTO){
-
         cheerDTO.setUserId(authenticationFacade.getUserId());
         cheerService.insertCheer(cheerDTO);
     }
+
+    @GetMapping("/select/20")
+    public void selectLimit20Cheer(){
+
+        Long userId = authenticationFacade.getUserId();
+        cheerService.selectLimit20Cheer(userId);
+
+    }
+
+    @PutMapping("/update-check")
+    public void updateCheck(Long cheerSeq){
+        cheerService.updateCheck(cheerSeq);
+    }
+
 }

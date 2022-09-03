@@ -1,24 +1,13 @@
 package com.youngboyandnunas.backend.util;
 
 
-import com.amazonaws.auth.policy.Resource;
 import com.youngboyandnunas.backend.global.infra.AwsS3UploadFacade;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 @Component
 public class FileStorageUtil{
