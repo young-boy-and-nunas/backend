@@ -6,7 +6,7 @@ import com.youngboyandnunas.backend.domain.user.dao.UserRepository;
 import com.youngboyandnunas.backend.domain.user.domain.User;
 import com.youngboyandnunas.backend.domain.worry.domain.Worry;
 import com.youngboyandnunas.backend.domain.worry.dto.CreateWorryRequestDto;
-import com.youngboyandnunas.backend.domain.worry.dto.GetRandomWorryResponseDto;
+import com.youngboyandnunas.backend.domain.worry.dto.WorryResponseDTO;
 import com.youngboyandnunas.backend.domain.worry.dao.WorryRepository;
 import com.youngboyandnunas.backend.global.exception.ErrorCode;
 import com.youngboyandnunas.backend.global.exception.GlobalException;
@@ -15,6 +15,7 @@ import com.youngboyandnunas.backend.util.FileStorageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Service
@@ -28,7 +29,7 @@ public class WorryServiceImpl implements WorryService {
 
     @Transactional
     @Override
-    public GetRandomWorryResponseDto getRandomWorry() {
+    public WorryResponseDTO getRandomWorry() {
         Long userId = authenticationFacade.getUserId();
         Worry worry = worryRepository.getRandomWorry(userId);
         if (worry == null)
@@ -41,7 +42,7 @@ public class WorryServiceImpl implements WorryService {
                 .user(user)
                 .build());
 
-        return GetRandomWorryResponseDto.builder()
+        return WorryResponseDTO.builder()
                 .worrySeq(worry.getWorrySeq())
                 .contents(worry.getContents())
                 .imgUrl(worry.getImgUrl())
@@ -53,14 +54,16 @@ public class WorryServiceImpl implements WorryService {
         User user = userRepository.findById(authenticationFacade.getUserId())
                 .orElseThrow(() -> new GlobalException(ErrorCode.BAD_REQUEST_ERROR));
         user.setLuckyPoint(user.getLuckyPoint()-1);
+
         userRepository.save(user);
+
+        MultipartFile imgFile = dto.getImgFile();
         Worry worry = Worry.builder()
                 .contents(dto.getContents())
-                .imgUrl(fileStorageUtil.store(dto.getImgUrl()))
+                .imgUrl(imgFile != null? fileStorageUtil.store(dto.getImgFile()) : null)
                 .user(user)
                 .build();
         worryRepository.save(worry);
-
     }
 
 }

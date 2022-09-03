@@ -7,6 +7,7 @@ import com.youngboyandnunas.backend.domain.user.dao.UserRepository;
 import com.youngboyandnunas.backend.domain.user.domain.User;
 import com.youngboyandnunas.backend.domain.worry.dao.WorryRepository;
 import com.youngboyandnunas.backend.domain.worry.domain.Worry;
+import com.youngboyandnunas.backend.domain.worry.dto.WorryResponseDTO;
 import com.youngboyandnunas.backend.util.CustomModelMapper;
 import com.youngboyandnunas.backend.util.FileStorageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,6 @@ public class CheerService {
     private final CustomModelMapper customModelMapper;
 
     private final FileStorageUtil fileStorageUtil;
-
 
     @Autowired
     public CheerService(CheerRepository cheerRepository
@@ -72,10 +72,19 @@ public class CheerService {
     public List<CheerDTO> selectLimit20Cheer(Long userId){
 
         Optional<User> user = userRepository.findById(userId);
-        List<Cheer> cheerByUserIdLimit20 = cheerRepository.getCheerByUserIdLimit20(user.get(), PageRequest.of(0, 10));
+        List<Cheer> cheerByUserIdLimit20 = cheerRepository.getCheerByUserIdLimit20(user.get(), PageRequest.of(0, 20));
 
         List<CheerDTO> collect = cheerByUserIdLimit20.stream()
-                .map(m-> customModelMapper.strictMapper().map(m, CheerDTO.class))
+                .map(cheerEntity -> {
+
+                    CheerDTO cheerDTO = customModelMapper.strictMapper().map(cheerEntity, CheerDTO.class);
+                    WorryResponseDTO worryDTO = customModelMapper.strictMapper().map(cheerEntity.getWorry(), WorryResponseDTO.class);
+                    cheerDTO.setWorryDTO(worryDTO);
+                    cheerDTO.setCheerId(cheerDTO.getCheerId());
+
+                    return cheerDTO;
+
+                })
                 .collect(Collectors.toList());
 
         return collect;

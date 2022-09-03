@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CheerRepository extends CrudRepository<Cheer, Long> {
 
-    @Query(" select c from Cheer c where c.user = :user " +
+    @Query(" select c from Cheer c left join c.worry w where c.user = :user " +
             "order by c.cheerSeq desc ")
     List<Cheer> getCheerByUserIdLimit20(User user, PageRequest pageRequest);
 

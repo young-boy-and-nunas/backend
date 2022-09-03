@@ -1,24 +1,23 @@
 package com.youngboyandnunas.backend.domain.cheer.domain.dto;
 
-import com.youngboyandnunas.backend.domain.user.domain.User;
-import com.youngboyandnunas.backend.domain.worry.domain.Worry;
+import com.youngboyandnunas.backend.domain.worry.dto.WorryResponseDTO;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.*;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class CheerDTO {
 
+    private Long cheerId;
+
     private Long worryId ;
 
     private Long userId;
+
+    private WorryResponseDTO worryDTO;
 
     private String contents;
 

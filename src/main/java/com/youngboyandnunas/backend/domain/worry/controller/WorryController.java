@@ -1,7 +1,7 @@
 package com.youngboyandnunas.backend.domain.worry.controller;
 
 import com.youngboyandnunas.backend.domain.worry.dto.CreateWorryRequestDto;
-import com.youngboyandnunas.backend.domain.worry.dto.GetRandomWorryResponseDto;
+import com.youngboyandnunas.backend.domain.worry.dto.WorryResponseDTO;
 import com.youngboyandnunas.backend.domain.worry.service.WorryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class WorryController {
     private final WorryService worryService;
 
     @GetMapping
-    public ResponseEntity<GetRandomWorryResponseDto> getRandomWorry() {
+    public ResponseEntity<WorryResponseDTO> getRandomWorry() {
         return ResponseEntity.ok(worryService.getRandomWorry());
     }
 

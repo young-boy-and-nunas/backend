@@ -4,12 +4,18 @@ import com.youngboyandnunas.backend.domain.cheer.domain.dto.CheerDTO;
 import com.youngboyandnunas.backend.domain.cheer.domain.service.CheerService;
 import com.youngboyandnunas.backend.global.security.service.AuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.nio.charset.Charset;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cheer")
 public class CheerController {
-
     private final CheerService cheerService;
     private final AuthenticationFacade authenticationFacade;
 
@@ -26,16 +32,23 @@ public class CheerController {
     }
 
     @GetMapping("/select/20")
-    public void selectLimit20Cheer(){
+    public ResponseEntity<List<CheerDTO>> selectLimit20Cheer(){
 
         Long userId = authenticationFacade.getUserId();
-        cheerService.selectLimit20Cheer(userId);
+        List<CheerDTO> cheerDTOS = cheerService.selectLimit20Cheer(userId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        return new ResponseEntity<>(cheerDTOS, headers, HttpStatus.OK);
 
     }
 
     @PutMapping("/update-check")
     public void updateCheck(Long cheerSeq){
+
         cheerService.updateCheck(cheerSeq);
+
     }
 
 }
