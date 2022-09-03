@@ -25,6 +25,7 @@ public class User {
 
     private String nickname;
 
+    @Setter
     private int luckyPoint;
 
     @Setter

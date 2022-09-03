@@ -30,7 +30,10 @@ public class WorryServiceImpl implements WorryService {
     @Override
     public GetRandomWorryResponseDto getRandomWorry() {
         Worry worry = worryRepository.getRandomWorry();
-        User user = userRepository.findById(authenticationFacade.getUserId())
+        if (worry == null)
+            throw new GlobalException(ErrorCode.NOT_FOUND_ERROR);
+        Long userId = authenticationFacade.getUserId();
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new GlobalException(ErrorCode.BAD_REQUEST_ERROR));
 
         historyRepository.save(History.builder()
@@ -47,10 +50,17 @@ public class WorryServiceImpl implements WorryService {
 
     @Override
     public void createWorry(CreateWorryRequestDto dto) {
-        worryRepository.save(Worry.builder()
+        User user = userRepository.findById(authenticationFacade.getUserId())
+                .orElseThrow(() -> new GlobalException(ErrorCode.BAD_REQUEST_ERROR));
+        user.setLuckyPoint(user.getLuckyPoint()-1);
+        userRepository.save(user);
+        Worry worry = Worry.builder()
                 .contents(dto.getContents())
                 .imgUrl(fileStorageUtil.store(dto.getImgUrl()))
-                .build());
+                .user(user)
+                .build();
+        worryRepository.save(worry);
+
     }
 
 }
