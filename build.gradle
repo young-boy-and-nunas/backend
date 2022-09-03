@@ -57,6 +57,9 @@ dependencies {
 	//aws s3
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
+	//modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+
 }
 
 tasks.named('test') {

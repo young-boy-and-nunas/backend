@@ -18,3 +18,15 @@ auth:
     accessExp: ${JWT_EXP_ACCESS}
     refreshExp: ${JWT_EXP_REFRESH}
     secret: ${JWT_SECRET_KEY}
+cloud:
+  aws:
+    s3:
+      bucket: ${AWS_BUCKET}
+    region:
+      static: ${AWS_REGION}
+    stack:
+      auto: false
+    credentials:
+      instanceProfile: true
+      accessKey: ${AWS_ACCESS}
+      secretKey: ${AWS_SECRET}
