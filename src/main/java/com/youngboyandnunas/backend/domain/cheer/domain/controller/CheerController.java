@@ -27,7 +27,7 @@ public class CheerController {
 
     @PostMapping("/cheer")
     public void makeCheer(CheerDTO cheerDTO){
-        cheerDTO.setUserId(authenticationFacade.getUserId());
+//        cheerDTO.setUserId(authenticationFacade.getUserId());
         cheerService.insertCheer(cheerDTO);
     }
 

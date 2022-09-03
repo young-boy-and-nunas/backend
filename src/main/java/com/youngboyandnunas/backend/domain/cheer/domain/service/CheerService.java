@@ -33,6 +33,7 @@ public class CheerService {
 
     private final FileStorageUtil fileStorageUtil;
 
+
     @Autowired
     public CheerService(CheerRepository cheerRepository
             , UserRepository userRepository, WorryRepository worryRepository
@@ -50,6 +51,9 @@ public class CheerService {
 
 //        Cheer cheerEntity = customModelMapper.dtoToEntityMapper().map(cheerDTO, Cheer.class);
         Cheer cheerEntity = new Cheer();
+        Worry worryEntity = worryRepository.getWorryByWorrySeq(cheerDTO.getWorryId());
+        cheerDTO.setUserId(worryEntity.getUser().getUserSeq());
+
         cheerEntity.setContents(cheerDTO.getContents());
 
         User user = userRepository.findById(cheerDTO.getUserId()).get();

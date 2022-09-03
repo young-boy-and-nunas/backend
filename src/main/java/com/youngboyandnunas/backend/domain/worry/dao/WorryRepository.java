@@ -16,4 +16,6 @@ public interface WorryRepository extends JpaRepository<Worry, Long> {
     )
     Worry getRandomWorry(@Param("userSeq") Long userSeq);
 
+    Worry getWorryByWorrySeq(Long worrySeq);
+
 }
