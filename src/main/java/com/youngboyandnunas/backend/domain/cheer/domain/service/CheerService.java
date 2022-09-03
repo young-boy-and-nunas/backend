@@ -15,6 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,6 +66,7 @@ public class CheerService {
         user.plusLuckyPoint();
         cheerEntity.setUser(user);
         cheerEntity.setWorry(worry);
+        cheerEntity.setInsertDate(new Date());
         Cheer savedCheer = cheerRepository.save(cheerEntity);
 
         return customModelMapper.strictMapper().map(savedCheer, CheerDTO.class);
@@ -78,9 +81,11 @@ public class CheerService {
                 .map(cheerEntity -> {
 
                     CheerDTO cheerDTO = customModelMapper.strictMapper().map(cheerEntity, CheerDTO.class);
+
                     WorryResponseDTO worryDTO = customModelMapper.strictMapper().map(cheerEntity.getWorry(), WorryResponseDTO.class);
                     cheerDTO.setWorryDTO(worryDTO);
-                    cheerDTO.setCheerId(cheerDTO.getCheerId());
+                    cheerDTO.setCheerId(cheerEntity.getCheerSeq());
+                    cheerDTO.setCheerInsertDate(cheerEntity.getInsertDate());
 
                     return cheerDTO;
 

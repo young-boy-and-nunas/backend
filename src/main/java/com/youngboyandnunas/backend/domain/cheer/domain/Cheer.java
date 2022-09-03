@@ -5,6 +5,8 @@ import com.youngboyandnunas.backend.domain.worry.domain.Worry;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor
@@ -33,6 +35,8 @@ public class Cheer {
     private String audioUrl;
 
     private boolean readCheck;
+
+    private Date insertDate;
 
     @Builder
     public Cheer(Worry worry, User user, String contents, String imgUrl, String audioUrl) {
