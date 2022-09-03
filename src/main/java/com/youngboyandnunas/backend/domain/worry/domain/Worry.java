@@ -1,6 +1,7 @@
 package com.youngboyandnunas.backend.domain.worry.domain;
 
 import com.youngboyandnunas.backend.domain.cheer.domain.Cheer;
+import com.youngboyandnunas.backend.domain.history.domain.History;
 import com.youngboyandnunas.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,5 +37,8 @@ public class Worry {
 
     @OneToMany(mappedBy = "worry", cascade = CascadeType.REMOVE)
     private List<Cheer> cheerList;
+
+    @OneToMany(mappedBy = "worry", cascade = CascadeType.REMOVE)
+    private List<History> historyList;
 
 }
