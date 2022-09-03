@@ -5,7 +5,6 @@ import com.youngboyandnunas.backend.global.security.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /* swagger v3 */
                         "/v3/api-docs/**",
                         "/swagger-ui/**").permitAll()
-                .antMatchers("/sign-up*", "/sign-up/*", "/login").permitAll()
+                .antMatchers("/sign-up*", "/sign-up/*", "/login", "/token-refresh").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfig(jwtTokenProvider));
     }

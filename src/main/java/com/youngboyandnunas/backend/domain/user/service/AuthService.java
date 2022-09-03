@@ -4,14 +4,13 @@ import com.youngboyandnunas.backend.domain.user.dao.SignUpCertifyRepository;
 import com.youngboyandnunas.backend.domain.user.dao.UserRepository;
 import com.youngboyandnunas.backend.domain.user.domain.SignUpCertify;
 import com.youngboyandnunas.backend.domain.user.domain.User;
-import com.youngboyandnunas.backend.domain.user.dto.LoginRequest;
-import com.youngboyandnunas.backend.domain.user.dto.LoginResponse;
-import com.youngboyandnunas.backend.domain.user.dto.SignUpRequest;
+import com.youngboyandnunas.backend.domain.user.dto.*;
 import com.youngboyandnunas.backend.global.exception.ErrorCode;
 import com.youngboyandnunas.backend.global.exception.GlobalException;
 import com.youngboyandnunas.backend.global.security.service.JwtTokenProvider;
 import com.youngboyandnunas.backend.infra.mail.MailContentProvider;
 import com.youngboyandnunas.backend.infra.mail.MailSendFacade;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -59,6 +58,23 @@ public class AuthService {
 
         final String content = mailContentProvider.createSignUpContent(signUpCertify.getId().toString());
         mailSendFacade.sendHtmlMail(email, nickname + "님을 위한 위로해줘 우리병 회원가입 인증이 도착했습니다", content);
+    }
+
+    public TokenRefreshResponse refresh(TokenRefreshRequest request) {
+        final String refresh = request.getRefreshToken();
+
+        final Claims body = jwtTokenProvider.getBody(refresh);
+        if (!jwtTokenProvider.isRefresh(body)) {
+            throw new GlobalException(ErrorCode.UNAUTHORIZED_ERROR);
+        }
+
+        final String id = jwtTokenProvider.getId(body);
+        if (!userRepository.existsById(Long.valueOf(id))) {
+            throw new GlobalException(ErrorCode.UNAUTHORIZED_ERROR);
+        }
+
+        final String access = jwtTokenProvider.generateAccessToken(Long.valueOf(id));
+        return new TokenRefreshResponse(access);
     }
 
 }
