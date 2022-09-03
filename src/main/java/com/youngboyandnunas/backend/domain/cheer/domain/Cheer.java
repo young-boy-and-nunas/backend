@@ -25,16 +25,20 @@ public class Cheer {
     @JoinColumn(name = "user_seq", nullable = false)
     private User user;
 
+    @Column(length = 2040)
     private String contents;
 
     private String imgUrl;
 
+    private String audioUrl;
+
     @Builder
-    public Cheer(Worry worry, User user, String contents, String imgUrl) {
+    public Cheer(Worry worry, User user, String contents, String imgUrl, String audioUrl) {
         this.worry = worry;
         this.user = user;
         this.contents = contents;
         this.imgUrl = imgUrl;
+        this.audioUrl = audioUrl;
     }
 
 }

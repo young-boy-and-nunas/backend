@@ -22,6 +22,7 @@ public class Worry {
     @JoinColumn(name = "user_seq", nullable = false)
     private User user;
 
+    @Column(length = 2040)
     private String contents;
 
     private String imgUrl;
