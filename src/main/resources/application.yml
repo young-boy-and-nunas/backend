@@ -8,8 +8,8 @@ spring:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
   jpa:
-    generate-ddl: true
-    show-sql: true
+    generate-ddl: false
+    show-sql: false
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
