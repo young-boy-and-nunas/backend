@@ -14,12 +14,12 @@ public class WorryController {
 
     private final WorryService worryService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<GetRandomWorryResponseDto> getRandomWorry() {
         return ResponseEntity.ok(worryService.getRandomWorry());
     }
 
-    @PostMapping("/")
+    @PostMapping
     public void createWorry(@ModelAttribute CreateWorryRequestDto dto) {
         worryService.createWorry(dto);
     }
