@@ -10,6 +10,9 @@ spring:
   jpa:
     generate-ddl: false
     show-sql: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 auth:
   jwt:
     accessExp: ${JWT_EXP_ACCESS}
