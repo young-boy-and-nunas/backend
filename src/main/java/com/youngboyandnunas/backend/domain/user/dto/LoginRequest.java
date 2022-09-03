@@ -7,10 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
-public class SignUpRequest {
-
-    @NotNull
-    private String nickname;
+public class LoginRequest {
 
     @NotNull
     private String email;

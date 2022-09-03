@@ -1,5 +1,7 @@
 package com.youngboyandnunas.backend.domain.user.controller;
 
+import com.youngboyandnunas.backend.domain.user.dto.LoginRequest;
+import com.youngboyandnunas.backend.domain.user.dto.LoginResponse;
 import com.youngboyandnunas.backend.domain.user.dto.SignUpRequest;
 import com.youngboyandnunas.backend.domain.user.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,11 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final AuthService authService;
+
+    @PostMapping("/login")
+    private LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        return authService.login(request);
+    }
 
     @PostMapping("/sign-up/email")
     @ResponseStatus(HttpStatus.CREATED)

@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         /* swagger v3 */
                         "/v3/api-docs/**",
                         "/swagger-ui/**").permitAll()
-                .antMatchers("/sign-up*", "/sign-up/*").permitAll()
+                .antMatchers("/sign-up*", "/sign-up/*", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfig(jwtTokenProvider));
     }
