@@ -28,6 +28,10 @@ dependencies {
 	// jwt
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'it.ozimov:embedded-redis:0.7.2'
+
 	// querydsl
 	implementation 'com.querydsl:querydsl-jpa:5.0.0'
 	annotationProcessor(
@@ -41,6 +45,9 @@ dependencies {
 	// mysql
 	runtimeOnly 'mysql:mysql-connector-java'
 
+	// mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	// lombok
 	implementation 'org.projectlombok:lombok'
 	compileOnly 'org.projectlombok:lombok'
@@ -49,6 +56,17 @@ dependencies {
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.h2database:h2'
+
+	// swagger
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
+	//aws s3
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+	//modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+
 }
 
 tasks.named('test') {

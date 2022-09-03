@@ -10,8 +10,38 @@ spring:
     default-property-inclusion: non_null
   jpa:
     defer-datasource-initialization: true
+  redis:
+    host: localhost
+    port: 1234
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: asdf
+    password: asdf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    signUpLink: http://sdfsdf.com
 auth:
   jwt:
     accessExp: 1000
     refreshExp: 2000
     secret: asdf
+cloud:
+  aws:
+    s3:
+      bucket: test
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    credentials:
+      instanceProfile: true
+      accessKey: access
+      secretKey: secret
