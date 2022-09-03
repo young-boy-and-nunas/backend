@@ -6,7 +6,7 @@ import com.youngboyandnunas.backend.domain.user.dao.UserRepository;
 import com.youngboyandnunas.backend.domain.user.domain.User;
 import com.youngboyandnunas.backend.domain.worry.domain.Worry;
 import com.youngboyandnunas.backend.domain.worry.dto.CreateWorryRequestDto;
-import com.youngboyandnunas.backend.domain.worry.dto.GetRandomWorryResponseDto;
+import com.youngboyandnunas.backend.domain.worry.dto.WorryResponseDTO;
 import com.youngboyandnunas.backend.domain.worry.dao.WorryRepository;
 import com.youngboyandnunas.backend.global.exception.ErrorCode;
 import com.youngboyandnunas.backend.global.exception.GlobalException;
@@ -28,7 +28,7 @@ public class WorryServiceImpl implements WorryService {
 
     @Transactional
     @Override
-    public GetRandomWorryResponseDto getRandomWorry() {
+    public WorryResponseDTO getRandomWorry() {
         Worry worry = worryRepository.getRandomWorry();
         if (worry == null)
             throw new GlobalException(ErrorCode.NOT_FOUND_ERROR);
@@ -41,7 +41,7 @@ public class WorryServiceImpl implements WorryService {
                 .user(user)
                 .build());
 
-        return GetRandomWorryResponseDto.builder()
+        return WorryResponseDTO.builder()
                 .worrySeq(worry.getWorrySeq())
                 .contents(worry.getContents())
                 .imgUrl(worry.getImgUrl())
