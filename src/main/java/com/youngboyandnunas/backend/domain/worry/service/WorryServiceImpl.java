@@ -15,6 +15,7 @@ import com.youngboyandnunas.backend.util.FileStorageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Service
@@ -53,14 +54,16 @@ public class WorryServiceImpl implements WorryService {
         User user = userRepository.findById(authenticationFacade.getUserId())
                 .orElseThrow(() -> new GlobalException(ErrorCode.BAD_REQUEST_ERROR));
         user.setLuckyPoint(user.getLuckyPoint()-1);
+
         userRepository.save(user);
+
+        MultipartFile imgFile = dto.getImgFile();
         Worry worry = Worry.builder()
                 .contents(dto.getContents())
-                .imgUrl(fileStorageUtil.store(dto.getImgUrl()))
+                .imgUrl(imgFile != null? fileStorageUtil.store(dto.getImgFile()) : null)
                 .user(user)
                 .build();
         worryRepository.save(worry);
-
     }
 
 }
