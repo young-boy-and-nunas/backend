@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling()
                 .and().authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .antMatchers("/sign-up*", "/sign-up/*").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfig(jwtTokenProvider));
     }
