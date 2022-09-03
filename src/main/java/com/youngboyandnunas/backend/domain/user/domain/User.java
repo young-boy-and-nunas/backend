@@ -1,6 +1,7 @@
 package com.youngboyandnunas.backend.domain.user.domain;
 
 import com.youngboyandnunas.backend.domain.cheer.domain.Cheer;
+import com.youngboyandnunas.backend.domain.history.domain.History;
 import com.youngboyandnunas.backend.domain.worry.domain.Worry;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,6 +46,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Cheer> cheerList;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<History> historyList;
 
     public void plusLuckyPoint(){
         this.luckyPoint++;
