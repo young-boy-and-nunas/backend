@@ -46,9 +46,12 @@ public class CheerService {
     @Transactional
     public CheerDTO insertCheer(CheerDTO cheerDTO){
 
-        Cheer cheerEntity = customModelMapper.dtoToEntityMapper().map(cheerDTO, Cheer.class);
-        Optional<User> user = userRepository.findById(cheerDTO.getUserId());
-        Optional<Worry> worry = worryRepository.findById(cheerDTO.getWorryId());
+//        Cheer cheerEntity = customModelMapper.dtoToEntityMapper().map(cheerDTO, Cheer.class);
+        Cheer cheerEntity = new Cheer();
+        cheerEntity.setContents(cheerDTO.getContents());
+
+        User user = userRepository.findById(cheerDTO.getUserId()).get();
+        Worry worry = worryRepository.findById(cheerDTO.getWorryId()).get();
 
         if(cheerDTO.getAudioMultipartFile() != null){
             cheerEntity.setAudioUrl(fileStorageUtil.store(cheerDTO.getAudioMultipartFile()));
@@ -58,8 +61,9 @@ public class CheerService {
             cheerEntity.setImgUrl(fileStorageUtil.store(cheerDTO.getImageMultipartFile()));
         }
 
-        cheerEntity.setUser(user.get());
-        cheerEntity.setWorry(worry.get());
+        user.plusLuckyPoint();
+        cheerEntity.setUser(user);
+        cheerEntity.setWorry(worry);
         Cheer savedCheer = cheerRepository.save(cheerEntity);
 
         return customModelMapper.strictMapper().map(savedCheer, CheerDTO.class);

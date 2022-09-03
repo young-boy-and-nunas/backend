@@ -5,12 +5,14 @@ import com.youngboyandnunas.backend.domain.worry.domain.Worry;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class CheerDTO {
 

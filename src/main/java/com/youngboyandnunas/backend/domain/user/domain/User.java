@@ -45,4 +45,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Cheer> cheerList;
 
+    public void plusLuckyPoint(){
+        this.luckyPoint++;
+    }
+
 }

@@ -2,15 +2,15 @@ package com.youngboyandnunas.backend.domain.cheer.domain;
 
 import com.youngboyandnunas.backend.domain.user.domain.User;
 import com.youngboyandnunas.backend.domain.worry.domain.Worry;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Data
 public class Cheer {
 
     @Id
@@ -63,4 +63,5 @@ public class Cheer {
     public void updateCheck(){
         this.readCheck = true;
     }
+
 }
