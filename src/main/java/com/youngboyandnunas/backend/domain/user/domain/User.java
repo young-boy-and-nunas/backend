@@ -5,6 +5,7 @@ import com.youngboyandnunas.backend.domain.worry.domain.Worry;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +27,7 @@ public class User {
 
     private int luckyPoint;
 
+    @Setter
     private int state;
 
     @Builder
