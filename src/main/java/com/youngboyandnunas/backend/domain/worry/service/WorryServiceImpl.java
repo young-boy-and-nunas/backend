@@ -42,10 +42,13 @@ public class WorryServiceImpl implements WorryService {
                 .user(user)
                 .build());
 
+        String nickname = worry.getUser().getNickname();
+
         return WorryResponseDTO.builder()
                 .worrySeq(worry.getWorrySeq())
                 .contents(worry.getContents())
                 .imgUrl(worry.getImgUrl())
+                .nickname(nickname)
                 .build();
     }
 
